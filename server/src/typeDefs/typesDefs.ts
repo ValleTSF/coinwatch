@@ -11,9 +11,15 @@ export const typeDefs = gql`
     image: String
   }
 
+  type Dog {
+    message: String
+    status: String
+  }
+
   type Query {
     books: [Book]
     mainCards: [MainCard]
+    dog: Dog
   }
 `;
 
