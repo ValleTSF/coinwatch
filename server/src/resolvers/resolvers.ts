@@ -1,16 +1,8 @@
 import axios from "axios";
 import endpoints from "../endpoints";
-import { books, mainCards } from "../index";
 
 export const resolvers = {
   Query: {
-    books: () => books,
-    mainCards: () => mainCards,
-    dog: () => {
-      return axios
-        .get("https://dog.ceo/api/breeds/image/random")
-        .then(({ data }) => data);
-    },
     assets: (parent: any, args: any) => {
       const { searchString } = args;
       return axios
@@ -23,6 +15,7 @@ export const resolvers = {
           return data;
         });
     },
+
     symbols: (parent: any, args: any) => {
       const { searchString } = args;
       console.log("args", args);
@@ -38,6 +31,26 @@ export const resolvers = {
         )
         .then(({ data }) => {
           return data;
+        });
+    },
+  },
+  Asset: {
+    asset_icon: (parent: any) => {
+      return axios
+        .get(endpoints.getAllAssetIcons, {
+          headers: {
+            "X-CoinApi-Key": "94C3CE84-2FF6-4795-9B28-97325DE713C5",
+          },
+        })
+        .then(({ data: icons }) => {
+          console.log("icons", icons);
+          console.log("parent", parent);
+          const theIcon = icons.find(
+            (icon: any) => icon.asset_id === parent.asset_id
+          );
+          console.log("theIcon", theIcon);
+
+          return theIcon;
         });
     },
   },

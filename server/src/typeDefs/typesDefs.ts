@@ -1,21 +1,6 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
-  }
-
-  type MainCard {
-    title: String
-    image: String
-  }
-
-  type Dog {
-    message: String
-    status: String
-  }
-
   type Symbol {
     symbol_id: ID!
     exchange_id: String!
@@ -54,12 +39,15 @@ export const typeDefs = gql`
     id_icon: String
     data_start: String
     data_end: String
+    asset_icon: AssetIcon
+  }
+
+  type AssetIcon {
+    asset_id: ID!
+    url: String!
   }
 
   type Query {
-    books: [Book]
-    mainCards: [MainCard]
-    dog: Dog
     symbols(searchString: String!): [Symbol]
     assets(searchString: String!): [Asset]
   }
