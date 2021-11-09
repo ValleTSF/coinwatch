@@ -39,17 +39,18 @@ export const typeDefs = gql`
     id_icon: String
     data_start: String
     data_end: String
-    asset_icon: AssetIcon
+    asset_icon: String
   }
 
-  type AssetIcon {
-    asset_id: ID!
-    url: String!
+  input AssetsFilter {
+    name: String
+    type_is_crypto: Int
   }
 
   type Query {
     symbols(searchString: String!): [Symbol]
-    assets(searchString: String!): [Asset]
+    asset(searchString: String!): [Asset]
+    assets(input: AssetsFilter): [Asset]
   }
 `;
 
