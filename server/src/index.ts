@@ -1,10 +1,30 @@
 import { ApolloServer } from "apollo-server";
-import { resolvers } from "./resolvers";
+import axios, { AxiosResponse } from "axios";
+import endpoints from "./endpoints";
+import { Asset, Query } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 
-const server = new ApolloServer({ typeDefs, resolvers });
 require("dotenv").config();
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+const headers = { "X-CoinAPI-Key": process.env.COINAPI_API_KEY! };
+
+const getAssets = async () => {
+  return await axios.get(endpoints.getAllAssets, { headers });
+};
+
+getAssets().then(({ data }: AxiosResponse) => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers: {
+      Query,
+      Asset,
+    },
+    context: {
+      assets: data,
+    },
+  });
+
+  server.listen().then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
 });
