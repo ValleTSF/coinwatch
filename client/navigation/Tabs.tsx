@@ -5,13 +5,16 @@ import { SearchIcon, ViewListIcon } from "react-native-heroicons/solid";
 import TabBarButton from "../components/TabBarButton";
 import BrowseCoinScreen from "../screens/BrowseCoinsScreen";
 import HomeScreen from "../screens/HomeScreen";
+import { TabRoutes } from "./constants";
+import { RootTabParamList } from "./types";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
@@ -26,7 +29,7 @@ const Tabs = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name={TabRoutes.HOME_SCREEN}
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => {
@@ -47,7 +50,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="BrowseCoin"
+        name={TabRoutes.BROWSE_COINS_SCREEN}
         component={BrowseCoinScreen}
         options={{
           tabBarIcon: ({ focused }) => {

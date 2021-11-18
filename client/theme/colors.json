@@ -1,0 +1,24 @@
+{
+  "primary": {
+    "color": "#0C3274",
+    "onColor": "#FFFFFF"
+  },
+  "primary_variant": {
+    "color": "#C4C4C4",
+    "onColor": "#0C3274"
+  },
+  "secondary": {
+    "color": "#FFFFFF",
+    "onColor": "#A1A1A1"
+  },
+  "secondary_variant": {
+    "color": "#A1A1A1",
+    "onColor": "#FFFFFF"
+  },
+  "accent": {
+    "color": "#fca103",
+    "onColor": "#FFFFFF"
+  },
+  "error": "#FB3C00",
+  "success": "#00FB7A"
+}
