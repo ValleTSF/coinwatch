@@ -22,7 +22,7 @@ export const Background = styled.ImageBackground`
 export const Header = styled.Text`
   margin-top: ${height * 0.05}px;
   color: ${theme.primary.onColor};
-  font-size: 50px;
+  font-size: 64px;
   font-weight: bold;
 `;
 
