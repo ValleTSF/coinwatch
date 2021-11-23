@@ -1,69 +1,17 @@
 import { useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import React, { FC, useState } from "react";
 import { SearchIcon } from "react-native-heroicons/solid";
 import InputField from "../../components/InputField";
-import { Asset, AssetData } from "../../models";
-import { GET_ALL_ASSETS } from "../../queries";
+import { AssetData } from "../../models";
+import { GET_ASSET } from "../../queries";
 import theme from "../../theme";
 import * as S from "./styled";
 
 export const HomeScreen = () => {
-  const [filteredList, setFilteredList] = useState<Asset[]>([]);
-  const [originalList, setOriginalList] = useState<Asset[]>([]);
-  const {
-    data = { assets: [] },
-    loading,
-    error,
-  } = useQuery<AssetData>(GET_ALL_ASSETS);
-
-  useEffect(() => {
-    if (data) {
-      const { assets } = data;
-      setOriginalList(
-        [...assets].filter((asset) => asset.type_is_crypto === 1)
-      );
-    }
-  }, [loading]);
-
-  if (loading) {
-    return <Text>Loading</Text>;
-  }
+  const [searchString, setSearchString] = useState<string>("");
 
   const handleOnChange = (text: string) => {
-    if (text === "") {
-      setFilteredList([...originalList]);
-    }
-
-    setFilteredList(
-      [...originalList].filter((asset) =>
-        asset.name.toLowerCase().includes(text.toLowerCase())
-      )
-    );
-  };
-
-  const renderCoins = () => {
-    console.log("filtered length", filteredList.length);
-
-    if (filteredList.length > 0) {
-      return (
-        <S.CoinContainer>
-          {filteredList.map((asset) => {
-            return (
-              <S.CoinCard key={asset.asset_id}>
-                <S.CoinImage
-                  source={require("../../assets/images/dogecoin.png")}
-                />
-                <S.CoinTextContainer>
-                  <S.CoinTitle>{asset.asset_id}</S.CoinTitle>
-                  <S.CoinName>{asset.name}</S.CoinName>
-                </S.CoinTextContainer>
-              </S.CoinCard>
-            );
-          })}
-        </S.CoinContainer>
-      );
-    } else return null;
+    setSearchString(text);
   };
 
   return (
@@ -83,10 +31,49 @@ export const HomeScreen = () => {
             }
           />
         </S.SearchField>
-        {renderCoins()}
+        <CoinResult searchString={searchString} />
       </S.Background>
     </S.Container>
   );
+};
+
+const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
+  const {
+    data = { asset: [] },
+    loading,
+    error,
+  } = useQuery<AssetData>(GET_ASSET, { variables: { searchString } });
+
+  const { asset } = data;
+  console.log("LOADING STATUS", loading);
+
+  if (loading) {
+    return null;
+  }
+
+  console.log("start of rendering list");
+
+  if (asset.length > 0) {
+    console.log("finish");
+
+    return (
+      <S.CoinContainer>
+        {asset.map((asset) => {
+          return (
+            <S.CoinCard key={asset.asset_id}>
+              <S.CoinImage
+                source={require("../../assets/images/dogecoin.png")}
+              />
+              <S.CoinTextContainer>
+                <S.CoinTitle>{asset.asset_id}</S.CoinTitle>
+                <S.CoinName>{asset.name}</S.CoinName>
+              </S.CoinTextContainer>
+            </S.CoinCard>
+          );
+        })}
+      </S.CoinContainer>
+    );
+  } else return null;
 };
 
 export default HomeScreen;

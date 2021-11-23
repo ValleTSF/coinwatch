@@ -6,7 +6,7 @@ import Tabs from "./navigation/Tabs";
 import theme from "./theme";
 
 const client = new ApolloClient({
-  uri: "http://10.0.2.2:4000/",
+  uri: "http://192.168.1.144:4000/",
   cache: new InMemoryCache(),
 });
 

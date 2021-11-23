@@ -13,9 +13,13 @@ export const Query = {
     { searchString }: { searchString: string },
     { assets }: { assets: Asset[] }
   ) => {
-    return assets.filter((asset) =>
-      asset.name.toLowerCase().includes(searchString.toLowerCase())
-    );
+    if (searchString === "") {
+      return [];
+    } else {
+      return assets.filter((asset) =>
+        asset.name.toLowerCase().includes(searchString.toLowerCase())
+      );
+    }
   },
 
   symbols: (parent: any, { searchString }: { searchString: String }) => {

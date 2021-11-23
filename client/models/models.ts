@@ -6,5 +6,5 @@ export interface Asset {
 }
 
 export interface AssetData {
-  assets: Asset[];
+  asset: Asset[];
 }
