@@ -1,6 +1,7 @@
 import { ApolloServer } from "apollo-server";
 import axios, { AxiosResponse } from "axios";
 import endpoints from "./endpoints";
+import { Asset as AssetInterface } from "./models";
 import { Asset, Query } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 
@@ -12,7 +13,8 @@ const getAssets = async () => {
   return await axios.get(endpoints.getAllAssets, { headers });
 };
 
-getAssets().then(({ data }: AxiosResponse) => {
+getAssets().then(({ data }: AxiosResponse<AssetInterface[]>) => {
+  const cryptoCurrencies = data.filter((asset) => asset.type_is_crypto === 1);
   const server = new ApolloServer({
     typeDefs,
     resolvers: {
@@ -20,7 +22,7 @@ getAssets().then(({ data }: AxiosResponse) => {
       Asset,
     },
     context: {
-      assets: data,
+      assets: cryptoCurrencies,
     },
   });
 

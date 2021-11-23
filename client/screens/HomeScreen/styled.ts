@@ -29,3 +29,44 @@ export const Header = styled.Text`
 export const SearchField = styled.View`
   margin-top: 15px;
 `;
+
+export const CoinContainer = styled.ScrollView.attrs(() => ({
+  showsVerticalScrollIndicator: false,
+}))`
+  margin-top: 20px;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+`;
+
+export const CoinCard = styled.View`
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+  align-self: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
+  background-color: rgba(200, 200, 200, 0.7);
+  flex-direction: row;
+`;
+
+export const CoinTextContainer = styled.View`
+  justify-content: center;
+  margin-left: 30px;
+`;
+
+export const CoinTitle = styled.Text`
+  font-size: 24px;
+`;
+
+export const CoinName = styled.Text`
+  font-size: 20px;
+`;
+
+export const CoinImage = styled.Image`
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+`;

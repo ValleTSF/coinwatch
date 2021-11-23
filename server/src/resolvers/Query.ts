@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import endpoints from "../endpoints";
+import { Asset } from "../models";
 
 const headers = { "X-CoinAPI-Key": process.env.COINAPI_API_KEY! };
 
@@ -8,12 +8,14 @@ export const Query = {
     return ctx.assets;
   },
 
-  asset: (parent: any, { searchString }: { searchString: string }) => {
-    return axios
-      .get(endpoints.getAsset(searchString), { headers })
-      .then(({ data }: AxiosResponse) => {
-        return data;
-      });
+  asset: (
+    parent: any,
+    { searchString }: { searchString: string },
+    { assets }: { assets: Asset[] }
+  ) => {
+    return assets.filter((asset) =>
+      asset.name.toLowerCase().includes(searchString.toLowerCase())
+    );
   },
 
   symbols: (parent: any, { searchString }: { searchString: String }) => {
