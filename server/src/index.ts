@@ -9,12 +9,12 @@ require("dotenv").config();
 
 const headers = { "X-CoinAPI-Key": process.env.COINAPI_API_KEY! };
 
-const getAssets = () => {
+const getAssets = async () => {
   const mergedList: AssetMerged[] = [];
-  axios
+  return axios
     .get(endpoints.getAllAssets, { headers })
     .then(({ data: assetList }: AxiosResponse<AssetInterface[]>) => {
-      axios
+      return axios
         .get(endpoints.getAllAssetIcons, { headers })
         .then(({ data: assetIconList }: AxiosResponse<AssetIcon[]>) => {
           assetList.forEach((asset) => {
@@ -26,27 +26,31 @@ const getAssets = () => {
               mergedList.push({ ...asset, image: url });
             }
           });
+          return mergedList;
         })
         .catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
-
-  return mergedList;
 };
 
-const assets = getAssets();
-const cryptoCurrencies = assets.filter((asset) => asset.type_is_crypto === 1);
-const server = new ApolloServer({
-  typeDefs,
-  resolvers: {
-    Query,
-    Asset,
-  },
-  context: {
-    assets: cryptoCurrencies,
-  },
-});
+getAssets().then((assets) => {
+  if (assets) {
+    const cryptoCurrencies = assets.filter(
+      (asset) => asset.type_is_crypto === 1
+    );
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers: {
+        Query,
+        Asset,
+      },
+      context: {
+        assets: cryptoCurrencies,
+      },
+    });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+    server.listen().then(({ url }) => {
+      console.log(`🚀  Server ready at ${url}`);
+    });
+  }
 });
