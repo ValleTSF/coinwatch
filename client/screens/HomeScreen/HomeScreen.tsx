@@ -59,11 +59,10 @@ const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
     return (
       <S.CoinContainer>
         {asset.map((asset) => {
+          console.log(asset);
           return (
             <S.CoinCard key={asset.asset_id}>
-              <S.CoinImage
-                source={require("../../assets/images/dogecoin.png")}
-              />
+              <S.CoinImage source={{ uri: asset.image }} />
               <S.CoinTextContainer>
                 <S.CoinTitle>{asset.asset_id}</S.CoinTitle>
                 <S.CoinName>{asset.name}</S.CoinName>

@@ -40,6 +40,7 @@ export const typeDefs = gql`
     data_start: String
     data_end: String
     asset_icon: String
+    image: String
   }
 
   type Timeseries {

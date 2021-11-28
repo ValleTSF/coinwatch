@@ -7,6 +7,7 @@ export const GET_ALL_ASSETS = gql`
       asset_id
       type_is_crypto
       asset_icon
+      image
     }
   }
 `;
@@ -17,6 +18,7 @@ export const GET_ASSET = gql`
       asset_id
       type_is_crypto
       asset_icon
+      image
     }
   }
 `;

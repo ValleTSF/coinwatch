@@ -3,6 +3,7 @@ export interface Asset {
   name: string;
   type_is_crypto: number;
   asset_icon: string;
+  image: string;
 }
 
 export interface AssetData {
