@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { Asset } from "../models";
+import endpoints from "../endpoints";
+import { Asset, Timeseries } from "../models";
 
 const headers = { "X-CoinAPI-Key": process.env.COINAPI_API_KEY! };
 
@@ -31,6 +32,25 @@ export const Query = {
       .then(({ data }: AxiosResponse) => {
         return data;
       });
+  },
+
+  timeseries: (
+    parent: any,
+    {
+      assetId,
+      quoteId,
+      periodId,
+      timeEnd,
+    }: { assetId: string; quoteId: string; periodId: string; timeEnd: string }
+  ) => {
+    return axios
+      .get(endpoints.getTimeseries(assetId, quoteId, periodId, timeEnd), {
+        headers,
+      })
+      .then(({ data }: AxiosResponse<Timeseries[]>) => {
+        return data;
+      })
+      .catch((error) => console.log(error));
   },
 };
 

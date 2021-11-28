@@ -42,6 +42,17 @@ export const typeDefs = gql`
     asset_icon: String
   }
 
+  type Timeseries {
+    time_period_start: String!
+    time_period_end: String!
+    time_open: String!
+    time_close: String!
+    rate_open: Float!
+    rate_high: Float!
+    rate_low: Float!
+    rate_close: Float!
+  }
+
   input AssetsFilter {
     name: String
     type_is_crypto: Int
@@ -51,6 +62,12 @@ export const typeDefs = gql`
     symbols(searchString: String!): [Symbol]
     asset(searchString: String!): [Asset]
     assets(input: AssetsFilter): [Asset]
+    timeseries(
+      assetId: String!
+      quoteId: String!
+      periodId: String!
+      timeEnd: String!
+    ): [Timeseries]
   }
 `;
 
