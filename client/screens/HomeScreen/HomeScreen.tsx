@@ -1,15 +1,27 @@
 import { useQuery } from "@apollo/client";
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 import React, { FC, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { SearchIcon } from "react-native-heroicons/solid";
 import InputField from "../../components/InputField";
 import { AssetData } from "../../models";
+import { ScreenRoutes } from "../../navigation/constants";
+import { RootStackParamList } from "../../navigation/types";
 import { GET_ASSET } from "../../queries";
 import theme from "../../theme";
 import * as S from "./styled";
 
-export const HomeScreen = () => {
+type HomeScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  ScreenRoutes.MAIN_SCREEN
+>;
+
+export const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const [searchString, setSearchString] = useState<string>("");
+  console.log("navigation", navigation);
 
   const handleOnChange = (text: string) => {
     if (text.length > 1) {
@@ -36,13 +48,19 @@ export const HomeScreen = () => {
             }
           />
         </S.SearchField>
-        <CoinResult searchString={searchString} />
+        <CoinResult navigation={navigation} searchString={searchString} />
       </S.Background>
     </S.Container>
   );
 };
 
-const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
+const CoinResult: FC<{
+  searchString: string;
+  navigation: NativeStackNavigationProp<
+    RootStackParamList,
+    ScreenRoutes.MAIN_SCREEN
+  >;
+}> = ({ searchString, navigation }) => {
   const {
     data = { asset: [] },
     loading,
@@ -50,7 +68,6 @@ const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
   } = useQuery<AssetData>(GET_ASSET, { variables: { searchString } });
 
   const { asset } = data;
-  console.log("LOADING STATUS", loading);
 
   if (loading) {
     return (
@@ -60,15 +77,17 @@ const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
     );
   }
 
-  console.log("start of rendering list");
-
   if (asset.length > 0) {
     return (
       <S.CoinContainer>
         {asset.map((asset) => {
-          console.log(asset);
           return (
-            <S.CoinCard key={asset.asset_id}>
+            <S.CoinCard
+              key={asset.asset_id}
+              onPress={() =>
+                navigation.navigate(ScreenRoutes.COIN_DETAILS_SCREEN, { asset })
+              }
+            >
               <S.CoinImage source={{ uri: asset.image }} />
               <S.CoinTextContainer>
                 <S.CoinTitle>{asset.asset_id}</S.CoinTitle>

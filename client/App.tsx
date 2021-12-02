@@ -1,8 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import Tabs from "./navigation/Tabs";
+import RootNavigation from "./navigation";
 import theme from "./theme";
 
 const client = new ApolloClient({
@@ -13,10 +12,8 @@ const client = new ApolloClient({
 export const App = () => {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <StatusBar backgroundColor={theme.primary.color} />
-        <Tabs />
-      </NavigationContainer>
+      <StatusBar backgroundColor={theme.primary.color} />
+      <RootNavigation />
     </ApolloProvider>
   );
 };
