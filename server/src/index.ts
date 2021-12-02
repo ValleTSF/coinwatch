@@ -36,7 +36,7 @@ const getAssets = async () => {
 getAssets().then((assets) => {
   if (assets) {
     const cryptoCurrencies = assets.filter(
-      (asset) => asset.type_is_crypto === 1
+      (asset) => asset.type_is_crypto === 1 && asset.price_usd
     );
     const server = new ApolloServer({
       typeDefs,

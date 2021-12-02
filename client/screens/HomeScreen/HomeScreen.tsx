@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { FC, useState } from "react";
+import { ActivityIndicator } from "react-native";
 import { SearchIcon } from "react-native-heroicons/solid";
 import InputField from "../../components/InputField";
 import { AssetData } from "../../models";
@@ -11,7 +12,11 @@ export const HomeScreen = () => {
   const [searchString, setSearchString] = useState<string>("");
 
   const handleOnChange = (text: string) => {
-    setSearchString(text);
+    if (text.length > 1) {
+      setSearchString(text);
+    } else {
+      setSearchString("");
+    }
   };
 
   return (
@@ -48,14 +53,16 @@ const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
   console.log("LOADING STATUS", loading);
 
   if (loading) {
-    return null;
+    return (
+      <S.CoinContainer>
+        <ActivityIndicator size="large" color="white" />
+      </S.CoinContainer>
+    );
   }
 
   console.log("start of rendering list");
 
   if (asset.length > 0) {
-    console.log("finish");
-
     return (
       <S.CoinContainer>
         {asset.map((asset) => {

@@ -8,6 +8,7 @@ export const GET_ALL_ASSETS = gql`
       type_is_crypto
       asset_icon
       image
+      price_usd
     }
   }
 `;
@@ -19,6 +20,7 @@ export const GET_ASSET = gql`
       type_is_crypto
       asset_icon
       image
+      price_usd
     }
   }
 `;

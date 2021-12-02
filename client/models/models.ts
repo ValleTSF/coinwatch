@@ -4,6 +4,7 @@ export interface Asset {
   type_is_crypto: number;
   asset_icon: string;
   image: string;
+  price_usd: number;
 }
 
 export interface AssetData {
