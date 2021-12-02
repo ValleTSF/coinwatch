@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { StarIcon as NonFavoriteIcon } from "react-native-heroicons/outline";
 import { StarIcon as FavoriteIcon } from "react-native-heroicons/solid";
+import Divider from "../../components/Divider";
 import { ScreenRoutes } from "../../navigation/constants";
 import { RootStackParamList } from "../../navigation/types";
 import * as S from "./styled";
@@ -25,7 +26,7 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
               <S.CoinHeaderInformationContainer>
                 <S.CoinTitle>{asset.asset_id}</S.CoinTitle>
                 <S.CoinName>{asset.name}</S.CoinName>
-                <S.CoinPrice>$ {asset.price_usd.toFixed(2)}</S.CoinPrice>
+                <S.CoinPrice>$ {asset.price_usd.toFixed(5)}</S.CoinPrice>
               </S.CoinHeaderInformationContainer>
             </S.MetaDataContainer>
             <S.FavoriteContainer onPress={() => setFavorite(!favorite)}>
@@ -36,6 +37,7 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
               )}
             </S.FavoriteContainer>
           </S.CoinHeader>
+          <Divider width={90} />
         </S.CoinContainer>
       </S.Background>
     </S.Container>
