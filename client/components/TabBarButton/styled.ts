@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from "styled-components/native";
+import theme from "../../theme";
 
 interface TabTitleProps {
   focused: boolean;
@@ -11,7 +12,8 @@ export const Container = styled.View`
 `;
 
 export const TabTitle = styled.Text<TabTitleProps>`
-  color: ${({ focused }: TabTitleProps) => (focused ? "#0C3274" : "#595959")};
+  color: ${({ focused }: TabTitleProps) =>
+    focused ? theme.accent.color : theme.secondary.onColor};
   font-size: 16px;
   font-weight: bold;
 `;

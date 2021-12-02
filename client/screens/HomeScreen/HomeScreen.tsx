@@ -74,6 +74,7 @@ const CoinResult: FC<{ searchString: string }> = ({ searchString }) => {
                 <S.CoinTitle>{asset.asset_id}</S.CoinTitle>
                 <S.CoinName>{asset.name}</S.CoinName>
               </S.CoinTextContainer>
+              <S.CoinPrice>$ {asset.price_usd.toFixed(2)}</S.CoinPrice>
             </S.CoinCard>
           );
         })}

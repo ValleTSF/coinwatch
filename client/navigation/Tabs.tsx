@@ -5,6 +5,7 @@ import { SearchIcon, ViewListIcon } from "react-native-heroicons/solid";
 import TabBarButton from "../components/TabBarButton";
 import BrowseCoinScreen from "../screens/BrowseCoinsScreen";
 import HomeScreen from "../screens/HomeScreen";
+import theme from "../theme";
 import { TabRoutes } from "./constants";
 import { RootTabParamList } from "./types";
 
@@ -41,7 +42,9 @@ const Tabs = () => {
                   <SearchIcon
                     width={40}
                     height={40}
-                    color={focused ? "#0C3274" : "#595959"}
+                    color={
+                      focused ? theme.accent.color : theme.secondary.onColor
+                    }
                   />
                 }
               />
@@ -62,7 +65,9 @@ const Tabs = () => {
                   <ViewListIcon
                     width={40}
                     height={40}
-                    color={focused ? "#0C3274" : "#595959"}
+                    color={
+                      focused ? theme.accent.color : theme.secondary.onColor
+                    }
                   />
                 }
               />

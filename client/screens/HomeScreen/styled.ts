@@ -39,10 +39,10 @@ export const CoinContainer = styled.ScrollView.attrs(() => ({
   overflow: hidden;
 `;
 
-export const CoinCard = styled.View`
+export const CoinCard = styled.TouchableOpacity`
   border-radius: 10px;
   margin: 10px;
-  padding: 5px;
+  padding: 10px 5px;
   align-self: center;
   justify-content: flex-start;
   align-items: center;
@@ -53,7 +53,7 @@ export const CoinCard = styled.View`
 
 export const CoinTextContainer = styled.View`
   justify-content: center;
-  margin-left: 30px;
+  margin-left: 15px;
 `;
 
 export const CoinTitle = styled.Text`
@@ -69,4 +69,12 @@ export const CoinImage = styled.Image`
   height: 50px;
   margin-left: 5px;
   margin-right: 5px;
+`;
+
+export const CoinPrice = styled.Text`
+  font-size: 24px;
+  color: ${theme.success};
+  position: absolute;
+  margin-right: 10px;
+  right: 0;
 `;
