@@ -21,6 +21,8 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
   const { asset } = route.params;
   const { asset_id: assetId } = asset;
   const [favorite, setFavorite] = useState(false);
+  const [timeStart, setTimeStart] = useState();
+  const [timeEnd, setTimeEnd] = useState();
   const {
     data = { timeseries: [] },
     loading,
@@ -36,6 +38,8 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
   });
 
   const { timeseries } = data;
+
+  console.log("image uri", asset.image);
 
   return (
     <S.Container>
@@ -63,7 +67,7 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
             {loading ? (
               <ActivityIndicator size="large" color="white" />
             ) : (
-              <Chart timeseries={timeseries} currentPrice={asset.price_usd} />
+              <Chart timeseries={timeseries} />
             )}
           </S.ChartContainer>
         </S.CoinContainer>
