@@ -21,7 +21,7 @@ export const CoinContainer = styled.View`
   width: 90%;
   height: 90%;
   border-radius: 10px;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 export const CoinImage = styled.Image`
@@ -71,4 +71,12 @@ export const FavoriteContainer = styled.TouchableOpacity`
 export const ChartContainer = styled.View`
   align-items: center;
   justify-content: center;
+`;
+
+export const TimeContainer = styled.View`
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 65%;
 `;

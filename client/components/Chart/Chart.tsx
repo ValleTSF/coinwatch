@@ -14,7 +14,6 @@ export const Chart = ({ timeseries }: ChartProps) => {
 
   useEffect(() => {
     if (timeseries) {
-      console.log("inside if");
       const data = timeseries.map((snapshot) => {
         const timestamp = getTime(new Date(snapshot.time_period_start));
         return { timestamp, value: snapshot.rate_high };

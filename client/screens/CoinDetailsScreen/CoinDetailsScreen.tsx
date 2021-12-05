@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { format, subDays, subMonths, subWeeks } from "date-fns";
 import React, { useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { StarIcon as NonFavoriteIcon } from "react-native-heroicons/outline";
 import { StarIcon as FavoriteIcon } from "react-native-heroicons/solid";
+import Button from "../../components/Button";
 import Chart from "../../components/Chart";
 import Divider from "../../components/Divider";
 import { TimeseriesData } from "../../models";
@@ -21,8 +23,8 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
   const { asset } = route.params;
   const { asset_id: assetId } = asset;
   const [favorite, setFavorite] = useState(false);
-  const [timeStart, setTimeStart] = useState();
-  const [timeEnd, setTimeEnd] = useState();
+  const [timeStart, setTimeStart] = useState<string>();
+  const [timeEnd, setTimeEnd] = useState<string>();
   const {
     data = { timeseries: [] },
     loading,
@@ -32,14 +34,26 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
       assetId,
       quoteId: "USD",
       periodId: "1DAY",
-      timeStart: "2021-11-27",
-      timeEnd: "2021-12-04",
+      timeStart,
+      timeEnd,
     },
   });
 
-  const { timeseries } = data;
+  const handleOnDateClick = (chosenTime: string) => {
+    const today = format(new Date(), "yyyy-MM-dd");
+    let targetDay;
+    if (chosenTime === "1D") {
+      targetDay = format(subDays(new Date(), 1), "yyyy-MM-dd");
+    } else if (chosenTime === "1W") {
+      targetDay = format(subWeeks(new Date(), 1), "yyyy-MM-dd");
+    } else {
+      targetDay = format(subMonths(new Date(), 1), "yyyy-MM-dd");
+    }
+    setTimeEnd(today);
+    setTimeStart(targetDay);
+  };
 
-  console.log("image uri", asset.image);
+  const { timeseries } = data;
 
   return (
     <S.Container>
@@ -70,6 +84,25 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
               <Chart timeseries={timeseries} />
             )}
           </S.ChartContainer>
+          {!loading && (
+            <S.TimeContainer>
+              <Button
+                onPress={() => handleOnDateClick("1D")}
+                title={"1D"}
+                size="xs"
+              />
+              <Button
+                onPress={() => handleOnDateClick("1W")}
+                title={"1W"}
+                size="xs"
+              />
+              <Button
+                onPress={() => handleOnDateClick("1M")}
+                title={"1M"}
+                size="xs"
+              />
+            </S.TimeContainer>
+          )}
         </S.CoinContainer>
       </S.Background>
     </S.Container>
