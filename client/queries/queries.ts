@@ -24,3 +24,25 @@ export const GET_ASSET = gql`
     }
   }
 `;
+
+export const GET_TIMESERIES = gql`
+  query Timeseries(
+    $assetId: String!
+    $quoteId: String!
+    $periodId: String!
+    $timeStart: String!
+    $timeEnd: String!
+  ) {
+    timeseries(
+      assetId: $assetId
+      quoteId: $quoteId
+      periodId: $periodId
+      timeStart: $timeStart
+      timeEnd: $timeEnd
+    ) {
+      time_period_start
+      time_period_end
+      rate_high
+    }
+  }
+`;

@@ -67,3 +67,10 @@ export const FavoriteContainer = styled.TouchableOpacity`
   align-self: flex-start;
   right: 0;
 `;
+
+export const ChartContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;

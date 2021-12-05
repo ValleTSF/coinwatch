@@ -21,7 +21,6 @@ type HomeScreenProps = NativeStackScreenProps<
 
 export const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const [searchString, setSearchString] = useState<string>("");
-  console.log("navigation", navigation);
 
   const handleOnChange = (text: string) => {
     if (text.length > 1) {

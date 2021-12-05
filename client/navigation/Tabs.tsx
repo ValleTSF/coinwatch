@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { SearchIcon, ViewListIcon } from "react-native-heroicons/solid";
+import { SearchIcon, StarIcon } from "react-native-heroicons/solid";
 import TabBarButton from "../components/TabBarButton";
 import BrowseCoinScreen from "../screens/BrowseCoinsScreen";
 import HomeScreen from "../screens/HomeScreen";
@@ -60,9 +60,9 @@ const Tabs = () => {
             return (
               <TabBarButton
                 focused={focused}
-                title="Browse"
+                title="Favorites"
                 icon={
-                  <ViewListIcon
+                  <StarIcon
                     width={40}
                     height={40}
                     color={

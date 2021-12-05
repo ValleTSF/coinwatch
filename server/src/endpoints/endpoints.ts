@@ -13,10 +13,11 @@ const endpoints = {
     assetId: string,
     quoteId: string,
     periodId: string,
+    timeStart: string,
     timeEnd: string
   ) =>
     apiBase(
-      `/exchangerate/${assetId}/${quoteId}/history?period_id=${periodId}&time_end=${timeEnd}`
+      `/exchangerate/${assetId}/${quoteId}/history?period_id=${periodId}&time_start=${timeStart}&time_end=${timeEnd}`
     ),
 };
 

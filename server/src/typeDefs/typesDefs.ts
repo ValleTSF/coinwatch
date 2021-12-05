@@ -1,26 +1,6 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
-  type Symbol {
-    symbol_id: ID!
-    exchange_id: String!
-    symbol_type: String!
-    asset_id_base: String
-    asset_id_quote: String
-    option_type_is_call: Boolean
-    option_strike_price: Float
-    option_contract_unit: Float
-    option_exercise_style: String
-    option_expiration_time: String
-    data_end: String
-    data_quote_end: String
-    data_trade_end: String
-    symbol_id_exchange: String
-    asset_id_base_exchange: String
-    asset_id_quote_exchange: String
-    image: String
-  }
-
   type Asset {
     asset_id: ID!
     name: String!
@@ -54,19 +34,14 @@ export const typeDefs = gql`
     rate_close: Float!
   }
 
-  input AssetsFilter {
-    name: String
-    type_is_crypto: Int
-  }
-
   type Query {
-    symbols(searchString: String!): [Symbol]
     asset(searchString: String!): [Asset]
-    assets(input: AssetsFilter): [Asset]
+    assets: [Asset]
     timeseries(
       assetId: String!
       quoteId: String!
       periodId: String!
+      timeStart: String!
       timeEnd: String!
     ): [Timeseries]
   }

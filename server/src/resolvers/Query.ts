@@ -23,30 +23,29 @@ export const Query = {
     }
   },
 
-  symbols: (parent: any, { searchString }: { searchString: String }) => {
-    return axios
-      .get(
-        `https://rest.coinapi.io/v1/symbols?filter_symbol_id=${searchString}`,
-        { headers }
-      )
-      .then(({ data }: AxiosResponse) => {
-        return data;
-      });
-  },
-
   timeseries: (
     parent: any,
     {
       assetId,
       quoteId,
       periodId,
+      timeStart,
       timeEnd,
-    }: { assetId: string; quoteId: string; periodId: string; timeEnd: string }
+    }: {
+      assetId: string;
+      quoteId: string;
+      periodId: string;
+      timeStart: string;
+      timeEnd: string;
+    }
   ) => {
     return axios
-      .get(endpoints.getTimeseries(assetId, quoteId, periodId, timeEnd), {
-        headers,
-      })
+      .get(
+        endpoints.getTimeseries(assetId, quoteId, periodId, timeStart, timeEnd),
+        {
+          headers,
+        }
+      )
       .then(({ data }: AxiosResponse<Timeseries[]>) => {
         return data;
       })
