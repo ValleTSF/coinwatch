@@ -10,7 +10,7 @@ import InputField from "../../components/InputField";
 import { AssetData } from "../../models";
 import { ScreenRoutes } from "../../navigation/constants";
 import { RootStackParamList } from "../../navigation/types";
-import { GET_ASSET } from "../../queries";
+import { GET_ASSETS } from "../../queries";
 import theme from "../../theme";
 import * as S from "./styled";
 
@@ -61,12 +61,12 @@ const CoinResult: FC<{
   >;
 }> = ({ searchString, navigation }) => {
   const {
-    data = { asset: [] },
+    data = { assets: [] },
     loading,
     error,
-  } = useQuery<AssetData>(GET_ASSET, { variables: { searchString } });
+  } = useQuery<AssetData>(GET_ASSETS, { variables: { searchString } });
 
-  const { asset } = data;
+  const { assets } = data;
 
   if (loading) {
     return (
@@ -76,10 +76,15 @@ const CoinResult: FC<{
     );
   }
 
-  if (asset.length > 0) {
+  if (assets.length > 0) {
     return (
       <S.CoinContainer>
-        {asset.map((asset) => {
+        {/* <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        /> */}
+        {assets.map((asset) => {
           return (
             <S.CoinCard
               key={asset.asset_id}

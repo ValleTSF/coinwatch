@@ -8,7 +8,7 @@ export interface Asset {
 }
 
 export interface AssetData {
-  asset: Asset[];
+  assets: Asset[];
 }
 
 export interface TimeseriesData {

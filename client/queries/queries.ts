@@ -12,9 +12,9 @@ export const GET_ALL_ASSETS = gql`
     }
   }
 `;
-export const GET_ASSET = gql`
+export const GET_ASSETS = gql`
   query ($searchString: String!) {
-    asset(searchString: $searchString) {
+    assets(searchString: $searchString) {
       name
       asset_id
       type_is_crypto

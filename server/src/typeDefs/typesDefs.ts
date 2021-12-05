@@ -35,8 +35,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    asset(searchString: String!): [Asset]
-    assets: [Asset]
+    assets(searchString: String!): [Asset]
     timeseries(
       assetId: String!
       quoteId: String!

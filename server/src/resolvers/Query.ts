@@ -5,11 +5,7 @@ import { Asset, Timeseries } from "../models";
 const headers = { "X-CoinAPI-Key": process.env.COINAPI_API_KEY! };
 
 export const Query = {
-  assets: (parent: any, args: any, ctx: any) => {
-    return ctx.assets;
-  },
-
-  asset: (
+  assets: (
     parent: any,
     { searchString }: { searchString: string },
     { assets }: { assets: Asset[] }
