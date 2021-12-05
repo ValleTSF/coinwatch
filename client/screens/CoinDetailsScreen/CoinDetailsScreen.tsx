@@ -1,14 +1,15 @@
 import { useQuery } from "@apollo/client";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { format, subDays, subMonths, subWeeks } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { StarIcon as NonFavoriteIcon } from "react-native-heroicons/outline";
 import { StarIcon as FavoriteIcon } from "react-native-heroicons/solid";
 import Button from "../../components/Button";
 import Chart from "../../components/Chart";
 import Divider from "../../components/Divider";
-import { TimeseriesData } from "../../models";
+import useFavorite from "../../hooks/useFavorite";
+import { Asset, TimeseriesData } from "../../models";
 import { ScreenRoutes } from "../../navigation/constants";
 import { RootStackParamList } from "../../navigation/types";
 import { GET_TIMESERIES } from "../../queries";
@@ -39,6 +40,32 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
     },
   });
 
+  const { addFavorite, removeFavorite, getFavorites } = useFavorite();
+
+  useEffect(() => {
+    getFavorites().then((favorites: Asset[]) => {
+      if (favorites.length > 0) {
+        favorites.forEach((favorite) => {
+          if (favorite.asset_id === asset.asset_id) {
+            setFavorite(true);
+          }
+        });
+      } else {
+        setFavorite(false);
+      }
+    });
+  }, []);
+
+  const handleOnFavorite = () => {
+    if (favorite) {
+      removeFavorite(asset);
+      setFavorite(false);
+    } else {
+      addFavorite(asset);
+      setFavorite(true);
+    }
+  };
+
   const handleOnDateClick = (chosenTime: string) => {
     const today = format(new Date(), "yyyy-MM-dd");
     let targetDay;
@@ -68,7 +95,7 @@ export default function CoinDetailsScreen({ route }: CoinDetailsScreenProps) {
                 <S.CoinPrice>$ {asset.price_usd.toFixed(5)}</S.CoinPrice>
               </S.CoinHeaderInformationContainer>
             </S.MetaDataContainer>
-            <S.FavoriteContainer onPress={() => setFavorite(!favorite)}>
+            <S.FavoriteContainer onPress={handleOnFavorite}>
               {favorite ? (
                 <FavoriteIcon width={40} height={40} color="gold" />
               ) : (

@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { SearchIcon, StarIcon } from "react-native-heroicons/solid";
 import TabBarButton from "../components/TabBarButton";
-import BrowseCoinScreen from "../screens/BrowseCoinsScreen";
+import FavoritesScreen from "../screens/FavoritesScreen";
 import HomeScreen from "../screens/HomeScreen";
 import theme from "../theme";
 import { TabRoutes } from "./constants";
@@ -54,8 +54,9 @@ const Tabs = () => {
       />
       <Tab.Screen
         name={TabRoutes.BROWSE_COINS_SCREEN}
-        component={BrowseCoinScreen}
+        component={FavoritesScreen}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <TabBarButton
