@@ -69,27 +69,21 @@ const CoinResult: FC<{
   const { assets } = data;
 
   if (loading) {
-    return (
-      <S.CoinContainer>
-        <ActivityIndicator size="large" color="white" />
-      </S.CoinContainer>
-    );
+    return <ActivityIndicator size="large" color="white" />;
   }
 
   if (assets.length > 0) {
     return (
-      <S.CoinContainer>
-        {/* <FlatList
-          data={DATA}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        /> */}
-        {assets.map((asset) => {
+      <S.CoinContainer
+        data={assets}
+        renderItem={({ item: asset }) => {
           return (
             <S.CoinCard
               key={asset.asset_id}
               onPress={() =>
-                navigation.navigate(ScreenRoutes.COIN_DETAILS_SCREEN, { asset })
+                navigation.navigate(ScreenRoutes.COIN_DETAILS_SCREEN, {
+                  asset,
+                })
               }
             >
               <S.CoinImage source={{ uri: asset.image }} />
@@ -100,8 +94,9 @@ const CoinResult: FC<{
               <S.CoinPrice>$ {asset.price_usd.toFixed(2)}</S.CoinPrice>
             </S.CoinCard>
           );
-        })}
-      </S.CoinContainer>
+        }}
+        keyExtractor={(item) => item.asset_id}
+      />
     );
   } else return null;
 };

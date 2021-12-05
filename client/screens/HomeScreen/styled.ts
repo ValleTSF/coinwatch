@@ -1,6 +1,7 @@
-import { Dimensions } from "react-native";
+import { Dimensions, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { Asset } from "../../models";
 import theme from "../../theme";
 
 const { height } = Dimensions.get("screen");
@@ -30,7 +31,9 @@ export const SearchField = styled.View`
   margin-top: 15px;
 `;
 
-export const CoinContainer = styled.ScrollView.attrs(() => ({
+export const CoinContainer = styled(
+  FlatList as new () => FlatList<Asset>
+).attrs(() => ({
   showsVerticalScrollIndicator: false,
 }))`
   margin-top: 20px;
