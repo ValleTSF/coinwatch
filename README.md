@@ -9,7 +9,7 @@ For the server to start correctly, you must have ts-node installed globally you 
 ```
 npm install -g ts-node
 ```
-In the server package you must also create a .env file. Path = coinwatch/server/.env.
+In the server package you must also create a .env file. Path=coinwatch/server/.env.
 In the .env file add these lines:
 ```
 NODE_ENV=development
