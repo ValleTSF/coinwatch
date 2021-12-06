@@ -1,4 +1,4 @@
-#Coinwatch consists of both a server and a client, both must be configured correctly in order
+# Coinwatch consists of both a server and a client, both must be configured correctly in order
 for the application to work properly. Follow the steps below to get it running.
 
 
