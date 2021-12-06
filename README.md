@@ -3,7 +3,7 @@
 Coinwatch consists of both a server and a client, both must be configured correctly in order
 for the application to work properly. Follow the steps below to get it running.
 
-Environment variables have been exposed for demo purposes. This practice should not be present in commercial applications.
+Environment variables have been exposed for demo purposes. This practice should not be replicated in commercial applications.
 
 # First Step
 The first step is to clone the project, you can achieve this by standing in your preferred folder and running:
