@@ -7,9 +7,9 @@ Environment variables have been exposed for demo purposes. This practice should 
 
 # First Step
 The first step is to clone the project, you can achieve this by standing in your preferred folder and running:
-
-git clone 
-
+```
+git clone https://github.com/ValleTSF/coinwatch.git
+```
 
 # Server
 For the server to start correctly, you must have ts-node installed globally you can achieve this by running:
