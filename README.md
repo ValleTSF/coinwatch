@@ -3,6 +3,8 @@
 Coinwatch consists of both a server and a client, both must be configured correctly in order
 for the application to work properly. Follow the steps below to get it running.
 
+Environment variables have been exposed for demo purposes that practice should not be used in your projects.
+
 
 # Server
 For the server to start correctly, you must have ts-node installed globally you can achieve this by running:
