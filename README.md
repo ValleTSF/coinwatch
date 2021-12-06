@@ -4,9 +4,7 @@ Coinwatch consists of both a server and a client, both must be configured correc
 for the application to work properly. Follow the steps below to get it running.
 
 
-
-
---Server--
+# Server
 For the server to start correctly, you must have ts-node installed globally you can achieve this by running:
 
 npm install -g ts-node
@@ -27,11 +25,7 @@ after that make sure you're in the server package and start the server by runnin
 npm start
 
 
-
-
-
-
---Client--
+# Client
 For the client to start correctly, you must have expo installed globally, you can achieve this by running:
 
 npm install --global expo-cli
