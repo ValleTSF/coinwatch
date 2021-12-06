@@ -24,7 +24,7 @@ COINAPI_HOST=https://rest.coinapi.io
 COINAPI_API_KEY=94C3CE84-2FF6-4795-9B28-97325DE713C5
 ```
 
-before running the server make sure to run:
+before running the server make sure to stand in the server package and run:
 ```
 npm install
 ```
