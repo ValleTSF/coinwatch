@@ -29,7 +29,7 @@ before running the server make sure to stand in the server package and run:
 npm install
 ```
 
-after that make sure you're in the server package and start the server by running:
+after that make sure you're still in the server package and start the server by running:
 ```
 npm start
 ```
@@ -40,7 +40,12 @@ For the client to start correctly, you must have expo installed globally, you ca
 ```
 npm install --global expo-cli
 ```
-after that make sure you're in the client package and start the client by running:
+before running the client make sure to stand in the client package and run:
+```
+npm install
+```
+
+after that make sure you're still in the client package and start the client by running:
 ```
 expo start
 ```
