@@ -5,6 +5,11 @@ for the application to work properly. Follow the steps below to get it running.
 
 Environment variables have been exposed for demo purposes. This practice should not be present in commercial applications.
 
+# First Step
+The first step is to clone the project, you can achieve this by standing in your preferred folder and running:
+
+git clone 
+
 
 # Server
 For the server to start correctly, you must have ts-node installed globally you can achieve this by running:
